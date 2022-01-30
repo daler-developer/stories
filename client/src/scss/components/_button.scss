@@ -1,0 +1,41 @@
+.button {
+  @include flex-center {
+    display: inline-flex;
+  };
+  border-radius: 3px;
+  font-size: 17px;
+  padding: 3px;
+  
+  &--color--blue {
+    color: rgb(255, 255, 255);
+    background-color: rgb(59 130 246);
+
+    &:hover:not(:disabled) {
+      background-color: rgb(37 99 235);
+    }
+    & .button__loader {
+      border-color: rgb(255, 255, 255);
+      border-bottom-color: transparent;
+    }
+  }
+  &--color--light {
+    color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.054);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 0, 0, 0.17);
+    }
+    & .button__loader {
+      border-color: rgb(0, 0, 0);
+      border-bottom-color: transparent;
+    }
+  }
+  &__loader {
+    height: 70%;
+    aspect-ratio: 1 / 1;
+    border: 3px solid rgb(255, 255, 255);
+    border-bottom-color: transparent;
+    animation: spinner-rotate 1s linear infinite;
+    border-radius: 50%;
+  }
+}

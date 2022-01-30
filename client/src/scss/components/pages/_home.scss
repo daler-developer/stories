@@ -1,0 +1,12 @@
+.home {
+  height: 100%;
+  padding: 4px;
+
+  &__users {
+    display: flex;
+    gap: 4px;
+  }
+  &__user {
+    flex-wrap: wrap;
+  }
+}

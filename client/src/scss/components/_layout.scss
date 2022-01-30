@@ -1,0 +1,16 @@
+.layout {
+  height: 100vh;
+  padding: 15px;
+  background-color: rgb(209 213 219);
+  
+  &__body {
+    @include push--auto;
+    overflow: hidden;
+    padding: 40px 0 40px 0;
+    position: relative;
+    height: 70vh;
+    max-width: 400px;
+    border-radius: 5px;
+    background-color: white;
+  }
+}
