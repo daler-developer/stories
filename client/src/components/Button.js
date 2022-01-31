@@ -1,19 +1,31 @@
-import classNames from 'classnames';
+import classNames from 'classnames'
 import pt from 'prop-types'
 
-
-const Button = ({ children, isLoading, className, classes, color, ...rest }) => {
+const Button = ({
+  children,
+  isLoading,
+  className,
+  classes,
+  color,
+  ...rest
+}) => {
   return (
-    <button type="submit" className={classNames('button', `button--color--${color}`, className)} {...rest}>
+    <button
+      type="submit"
+      className={classNames('button', `button--color--${color}`, className)}
+      {...rest}
+    >
       {isLoading ? (
         <div className={classNames('button__loader', classes?.loader)} />
-      ) : children}
+      ) : (
+        children
+      )}
     </button>
   )
-};
+}
 
 Button.defaultProps = {
-  color: 'blue'
+  color: 'blue',
 }
 
 Button.propTypes = {
@@ -22,9 +34,9 @@ Button.propTypes = {
   className: pt.string,
   classes: pt.shape({
     root: pt.string,
-    loader: pt.string
+    loader: pt.string,
   }),
-  color: pt.oneOf(['blue', 'light'])
+  color: pt.oneOf(['blue', 'light']),
 }
 
-export default Button;
+export default Button

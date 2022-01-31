@@ -1,0 +1,33 @@
+.loader {
+  aspect-ratio: 1 / 1;
+  border-bottom-color: transparent;
+  animation: spinner-rotate 0.7s ease-in infinite;
+  border-radius: 50%;
+  border-style: solid;
+
+  &--color--black {
+    border-color: rgb(0, 0, 0);
+    border-bottom-color: transparent;
+  }
+  &--color--white {
+    border-color: rgb(0, 0, 0);
+    border-bottom-color: transparent;
+  }
+  &--color--grey {
+    border-color: rgb(128, 128, 128);
+    border-bottom-color: transparent;
+  }
+
+  &--size--sm {
+    border-width: 2px;
+    width: 20px;
+  }
+  &--size--md {
+    border-width: 3px;
+    width: 30px;
+  }
+  &--size--lg {
+    border-width: 4px;
+    width: 40px;
+  }
+}

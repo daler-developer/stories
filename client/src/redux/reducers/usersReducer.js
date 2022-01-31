@@ -2,40 +2,44 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { authActions } from 'redux/reducers/authReducer'
 import api from 'utils/api'
 
+const fetchUsers = createAsyncThunk(
+  'users/fetchUsers',
+  async ({ excludeCurrent }, thunkAPI) => {
+    try {
+      const { data } = await api.get(
+        `/api/users${excludeCurrent ? `?excludeCurrent=yes` : ''}`
+      )
 
-const fetchUsers = createAsyncThunk('users/fetchUsers', async ({ excludeCurrent }, thunkAPI) => {
-  try {    
-    const { data } = await api.get(`/api/users${excludeCurrent ? `?excludeCurrent=yes` : ''}`)
-
-    return { data }
-  } catch (e) {
-    thunkAPI.dispatch(uiActions.openAlert({ type: 'error', text: e.response.data.message }))
-    return thunkAPI.rejectWithValue({ data: e.respones.data })
+      return { data }
+    } catch (e) {
+      thunkAPI.dispatch(
+        uiActions.openAlert({ type: 'error', text: e.response.data.message })
+      )
+      return thunkAPI.rejectWithValue({ data: e.respones.data })
+    }
   }
-})
-
+)
 
 const initialState = {
   list: [],
   fetchingStatus: 'idle', // 'idle', 'loading', 'loaded', 'error'
+  isFetching: false,
 }
 
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {
-    
-  },
+  reducers: {},
   extraReducers: {
     [fetchUsers.pending](state, { payload }) {
-      state.fetchingStatus = 'loading'
+      state.isFetching = true
     },
     [fetchUsers.fulfilled](state, { payload }) {
       state.list.push(...payload.data.users)
-      state.fetchingStatus = 'loaded'
+      state.isFetching = false
     },
     [fetchUsers.rejected](state, { payload }) {
-      state.fetchingStatus = 'error'
+      state.isFetching = false
     },
     [authActions.register.fulfilled](state, { payload }) {
       state.list.push(payload.data.user)
@@ -46,7 +50,7 @@ const usersSlice = createSlice({
     [authActions.loginWithToken.fulfilled](state, { payload }) {
       state.list.push(payload.data.user)
     },
-  }
+  },
 })
 
 export const selectUsers = (state) => {
@@ -59,6 +63,14 @@ export const selectUsersFetchingStatus = (state) => {
 
 export const selectUserById = (state, _id) => {
   return state.users.list.find((user) => user._id === _id)
+}
+
+export const selectIsUsersFetching = (state) => {
+  return state.users.isFetching
+}
+
+export const selectUsersByUsernameIncludes = (state, username) => {
+  return state.users.list.filter((user) => user.username.includes(username))
 }
 
 export const usersActions = {

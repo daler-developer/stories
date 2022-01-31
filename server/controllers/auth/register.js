@@ -18,19 +18,14 @@ const register = async (req, res) => {
       user.validateSync()
     } catch (e) {
       return res.status(400).json({ message: 'Validation error' })
-    }5
-  
-    try {
-      await user.save()
-    } catch (e) {
-      return res.status(400).json({ message: 'Cannot register' })
     }
+  
+    await user.save()
 
     const token = jwt.sign({ username: user.username }, 'jwt_secret', { expiresIn: '2 days' })
 
     return res.status(202).json({ user, token, message: 'Registered' })
   } catch (e) {
-    console.log(e)
     return res.status(400).json({ message: 'Unknown error' })
   }
 }

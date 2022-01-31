@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { authActions } from './authReducer'
 
-
-
 const initialState = {
   alert: {
     type: null,
     text: null,
-    isHidden: true
+    isHidden: true,
   },
   storiesPanel: {
     isHidden: true,
-    selectedUserId: null
-  }
+    selectedUserId: null,
+  },
 }
 
 const uiSlice = createSlice({
@@ -38,9 +36,7 @@ const uiSlice = createSlice({
       state.selectedUserId = null
     },
   },
-  extraReducers: {
-
-  }
+  extraReducers: {},
 })
 
 export const selectAlert = (state) => {
@@ -52,7 +48,7 @@ export const selectStoriesPanel = (state) => {
 }
 
 export const uiActions = {
-  ...uiSlice.actions
+  ...uiSlice.actions,
 }
 
 export default uiSlice.reducer

@@ -1,0 +1,31 @@
+.icon-button {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  background-color: transparent;
+
+  &--color--light {
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.041);
+    }
+  }
+  &--color--red {
+    color: rgb(220 38 38);
+
+    &:hover {
+      background-color: rgba(220, 38, 38, 0.061);;
+    }
+  }
+  &--size-sm {
+    font-size: 18px;
+    width: 20px;
+  }
+  &--size--md {
+    font-size: 22px;
+    width: 40px;
+  }
+  &--size--lg {
+    font-size: 28px;
+    width: 40px;
+  }
+}

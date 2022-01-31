@@ -26,10 +26,12 @@ const Alert = ({}) => {
         { 'alert--error': alert.type === 'error' }
       )}
     >
+      {/* {alert.type && ( */}
       <Icon className="alert__icon">
         {alert.type === 'success' && 'check_circle'}
         {alert.type === 'error' && 'error_outline'}
       </Icon>
+      {/* // )} */}
       <span className="alert__text">{alert.text || 'Unknown error'}</span>
     </div>
   ) : null

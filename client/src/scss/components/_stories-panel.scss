@@ -5,10 +5,28 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.796);
+  background-color: rgba(0, 0, 0, 0.891);
 
   &--hidden {
     visibility: hidden;
     opacity: 0;
+  }
+  &__body {
+    display: flex;
+    column-gap: 5px;
+  }
+  &__go-previous-btn,
+  &__go-next-btn {
+    color: rgb(255, 255, 255);
+    width: 100px;
+    font-size: 30px;
+  }
+  &__close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
   }
 }

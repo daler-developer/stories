@@ -28,8 +28,16 @@ const Auth = () => {
       password: '',
     },
     validationSchema: Yup.object().shape({
-      username: Yup.string().trim().required('Required').min(3, 'Too short').max(15, 'Too long'),
-      password: Yup.string().trim().required('Required').min(3, 'Too short').max(15, 'Too long'),
+      username: Yup.string()
+        .trim()
+        .required('Required')
+        .min(3, 'Too short')
+        .max(15, 'Too long'),
+      password: Yup.string()
+        .trim()
+        .required('Required')
+        .min(3, 'Too short')
+        .max(15, 'Too long'),
     }),
     onSubmit({ username, password }) {
       if (tab === 'register') {
@@ -91,7 +99,12 @@ const Auth = () => {
         {/* Password */}
 
         {/* Submit */}
-        <Button isLoading={form.isSubmitting} className="auth__submit-btn" type="submit" disabled={!(form.isValid && form.dirty)}>
+        <Button
+          isLoading={form.isSubmitting}
+          className="auth__submit-btn"
+          type="submit"
+          disabled={!(form.isValid && form.dirty)}
+        >
           {tab === 'login' && 'Login'}
           {tab === 'register' && 'Register'}
         </Button>

@@ -6,7 +6,6 @@ const getStories = async (req, res) => {
 
     return res.status(202).json({ stories, message: 'Stories sent' })
   } catch (e) {
-    console.log(e)
     return res.status(400).json({ message: 'Unknown error' })
   }
 }

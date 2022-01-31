@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
 const useOnClickOutside = (ref, handler, conditions) => {
   useEffect(() => {
@@ -11,7 +11,7 @@ const useOnClickOutside = (ref, handler, conditions) => {
       }
 
       if (conditions && !conditions.every((el) => Boolean(el) === true)) {
-        return 
+        return
       }
 
       handler(e)
@@ -21,7 +21,7 @@ const useOnClickOutside = (ref, handler, conditions) => {
 
     return () => {
       document.removeEventListener('click', listener)
-    };
+    }
   }, [ref, handler])
 }
 
