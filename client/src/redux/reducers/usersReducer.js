@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { authActions } from 'redux/reducers/authReducer'
+import { authActions, selectCurrentUserId } from 'redux/reducers/authReducer'
 import api from 'utils/api'
 
 const fetchUsers = createAsyncThunk(
@@ -20,9 +20,21 @@ const fetchUsers = createAsyncThunk(
   }
 )
 
+const changeAvatar = createAsyncThunk('users/changeAvatar', async (form, thunkAPI) => {
+  try {
+    const _id = selectCurrentUserId(thunkAPI.getState())
+
+    const { data } = await api.post(`/api/users/${_id}/change-avatar`, form)
+
+    return { data }
+  } catch (e) {
+    console.log(e.response)
+    return thunkAPI.rejectWithValue({ data: e.respones.data })
+  }
+})
+
 const initialState = {
   list: [],
-  fetchingStatus: 'idle', // 'idle', 'loading', 'loaded', 'error'
   isFetching: false,
 }
 
@@ -50,6 +62,11 @@ const usersSlice = createSlice({
     [authActions.loginWithToken.fulfilled](state, { payload }) {
       state.list.push(payload.data.user)
     },
+    [changeAvatar.fulfilled](state, { payload }) {
+      const index = state.list.findIndex((user) => user._id === payload.data.user._id)
+
+      state.list[index] = payload.data.user
+    }
   },
 })
 
@@ -76,6 +93,7 @@ export const selectUsersByUsernameIncludes = (state, username) => {
 export const usersActions = {
   ...usersSlice.actions,
   fetchUsers,
+  changeAvatar
 }
 
 export default usersSlice.reducer

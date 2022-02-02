@@ -9,7 +9,7 @@ const createStory = async (req, res) => {
       return res.status(400).json({ message: 'File is not given' })
     }
 
-    const story = new Story({ creatorId: currentUser._id, filename: file.filename })
+    const story = new Story({ creatorId: currentUser._id, fileUrl: `/api/files/stories/${file.filename}` })
 
     await story.save()
 

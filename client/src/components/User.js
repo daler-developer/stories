@@ -30,13 +30,10 @@ const User = ({ data, className }) => {
       )}
     >
       {/* Avatar */}
-      <div className="user__avatar-wrapper">
-        <Avatar
-          className="user__avatar"
-          size="md"
-          onClick={handleAvatarClick}
-        />
-      </div>
+      <Avatar
+        className="user__avatar"
+        user={data}
+      />
       {/* Avatar */}
 
       {/* Username */}

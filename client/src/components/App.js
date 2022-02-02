@@ -22,7 +22,7 @@ const App = () => {
       dispatch(storiesActions.fetchStories())
       navigate('/home')
     } else {
-      localStorage.removeItem('auth-token')
+  
     }
   }, [isAuthenticated])
 

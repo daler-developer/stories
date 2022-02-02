@@ -6,18 +6,14 @@ const Loader = ({ size, color, className }) => {
     <div
       className={classNames(
         'loader',
-        `loader--size--${size}`,
-        `loader--color--${color}`,
+        size && `loader--size--${size}`,
+        color && `loader--color--${color}`,
         className
       )}
     />
   )
 }
 
-Loader.defaultProps = {
-  size: 'md',
-  color: 'black',
-}
 
 Loader.propTypes = {
   size: pt.oneOf(['sm', 'md', 'lg']),

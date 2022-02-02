@@ -8,19 +8,14 @@ const IconButton = ({ className, icon, size, color, ...rest }) => {
       {...rest}
       className={classNames(
         'icon-button',
-        `icon-button--color--${color}`,
-        `icon-button--size--${size}`,
+        color && `icon-button--color--${color}`,
+        size && `icon-button--size--${size}`,
         className
       )}
     >
       <Icon>{icon}</Icon>
     </button>
   )
-}
-
-IconButton.defaultProps = {
-  color: 'light',
-  size: 'md'
 }
 
 IconButton.propsTypes = {

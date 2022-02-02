@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 
 
 const StorySchema = new Schema({
-  filename: {
+  fileUrl: {
     type: String,
     required: true,
   },

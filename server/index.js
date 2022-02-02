@@ -18,6 +18,12 @@ app.use('/api/users', usersRouter)
 app.use('/api/stories', storiesRouter)
 app.use('/api/files', express.static(path.join(__dirname, 'media')))
 
+app.use(express.static(path.join(__dirname, 'client-build')))
+
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client-build', 'index.html'))
+})
+
 const start = async () => {
   try {
     await mongoose.connect('mongodb+srv://dalersaidov:2000909k@cluster-for-learning.uecly.mongodb.net/stories-mern?retryWrites=true&w=majority')

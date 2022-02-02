@@ -4,4 +4,6 @@ client/package-lock.json
 
 server/node_modules
 server/package-lock.json
+server/client-build
 server/media/stories/**
+server/media/avatars/**

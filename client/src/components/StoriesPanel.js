@@ -1,5 +1,6 @@
+import classNames from 'classnames'
 import useOnClickOutside from 'hooks/useOnOutsideClick'
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectStoriesByCreatorId,
@@ -20,20 +21,21 @@ const StoriesPanel = () => {
     selectStoriesByCreatorId(state, selectedUser?._id)
   )
 
-  const bodyRef = useRef(null)
+  const hasNext = useMemo(() => selectedStoryIndex + 1 !== stories.length, [selectedStoryIndex, stories])
+  const hasPrevious = useMemo(() => selectedStoryIndex !== 0, [selectedStoryIndex, stories])
 
   const dispatch = useDispatch()
 
   const goNext = () => {
-    if (selectedStoryIndex + 1 === stories.length) return
-
-    setSelectedStoryIndex(selectedStoryIndex + 1)
+    if (hasNext) {
+      setSelectedStoryIndex(selectedStoryIndex + 1)
+    }
   }
 
   const goPrevious = () => {
-    if (selectedStoryIndex === 0) return
-
-    setSelectedStoryIndex(selectedStoryIndex - 1)
+    if (hasPrevious) {
+      setSelectedStoryIndex(selectedStoryIndex - 1)
+    }
   }
 
   const handleCloseBtnClick = () => {
@@ -46,34 +48,32 @@ const StoriesPanel = () => {
 
   return panel.isHidden ? null : (
     <div className="stories-panel">
-      {/* Body */}
-      <div className="stories-panel__body" ref={bodyRef}>
-        {/* Go previous */}
-        <button
-          className="stories-panel__go-previous-btn"
-          onClick={handleGoPreviusBtnClick}
-        >
-          <Icon>chevron_left</Icon>
-        </button>
-        {/* Go previous */}
+      {/* Go previous */}
+      <button
+        className={classNames('stories-panel__go-previous-btn', { 'stories-panel__go-previous-btn--mute': !hasPrevious })}
+        onClick={handleGoPreviusBtnClick}
+      >
+        <Icon>chevron_left</Icon>
+      </button>
+      {/* Go previous */}
 
-        {/* Img */}
+      {/* Img */}
+      <div className="stories-panel__img-wrapper">
         <img
-          src={`/api/files/stories/${stories[selectedStoryIndex].filename}`}
-          className="stories-panel__story-img"
+          src={stories[selectedStoryIndex].fileUrl}
+          className="stories-panel__img"
         />
-        {/* Img */}
-
-        {/* Go next */}
-        <button
-          className="stories-panel__go-next-btn"
-          onClick={handleGoNextBtnClick}
-        >
-          <Icon>chevron_right</Icon>
-        </button>
-        {/* Go next */}
       </div>
-      {/* Body */}
+      {/* Img */}
+
+      {/* Go next */}
+      <button
+        className={classNames('stories-panel__go-next-btn', { 'stories-panel__go-next-btn--mute': !hasNext })}
+        onClick={handleGoNextBtnClick}
+      >
+        <Icon>chevron_right</Icon>
+      </button>
+      {/* Go next */}
 
       {/* Close */}
       <button

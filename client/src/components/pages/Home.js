@@ -37,18 +37,11 @@ const Home = () => {
       {!isFetching && (
         <div className="home__users">
           {users.map((user) => (
-            <User data={user} key={user._id} className="home__user" />
+            <User data={user} key={user_id} key={user._id} className="home__user" />
           ))}
         </div>
       )}
       {/* Users */}
-      {/* No users label */}
-      {/* {users.length === 0 && (
-        <div className="home__no-users-label">
-          No users
-        </div>
-      )} */}
-      {/* No users label */}
     </div>
   )
 }

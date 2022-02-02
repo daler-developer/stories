@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     main: path.join(__dirname, 'src', 'index.js'),
   },
@@ -45,19 +45,10 @@ module.exports = {
       },
       {
         test: /\.js/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  '@babel/preset-react',
-                  {
-                    runtime: 'automatic',
-                  },
-                ],
-              ],
-            },
           },
         ],
       },
