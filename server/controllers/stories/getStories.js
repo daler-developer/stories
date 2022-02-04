@@ -1,8 +1,12 @@
-const Story = require("../../models/story")
+const Story = require('../../models/story')
 
 const getStories = async (req, res) => {
   try {
-    const stories = await Story.find()
+    const stories = await Story.find({
+      created: {
+        $gt: new Date(new Date().getTime() - 24 * 60 * 60 * 1000),
+      },
+    })
 
     return res.status(202).json({ stories, message: 'Stories sent' })
   } catch (e) {

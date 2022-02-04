@@ -1,6 +1,5 @@
-const User = require("../../models/user")
+const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
-
 
 const loginWithToken = async (req, res) => {
   try {
@@ -19,12 +18,11 @@ const loginWithToken = async (req, res) => {
 
     if (candidate) {
       return res.status(200).json({ user: candidate, message: 'Logged in' })
-    } 
+    }
 
     return res.status(404).json({ message: 'User not found' })
   } catch (e) {
     return res.status(500).json({ message: 'Unknown error' })
-
   }
 }
 

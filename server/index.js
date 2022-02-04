@@ -26,8 +26,10 @@ app.use('*', (req, res) => {
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb+srv://dalersaidov:2000909k@cluster-for-learning.uecly.mongodb.net/stories-mern?retryWrites=true&w=majority')
-    
+    await mongoose.connect(
+      'mongodb+srv://dalersaidov:2000909k@cluster-for-learning.uecly.mongodb.net/stories-mern?retryWrites=true&w=majority'
+    )
+
     app.listen(process.env.PORT || 4000)
     console.log('listening')
   } catch (e) {

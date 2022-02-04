@@ -1,6 +1,5 @@
 const validator = require('express-validator')
 
-
 const validationMiddleware = (req, res, next) => {
   try {
     const errors = validator.validationResult(req)
@@ -10,7 +9,6 @@ const validationMiddleware = (req, res, next) => {
     }
 
     return next()
-
   } catch (e) {
     return res.status(500).json({ message: 'Unknown error' })
   }

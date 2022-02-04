@@ -47,7 +47,7 @@ const Footer = () => {
         </Button>
       </footer>
 
-      <input type="file" onChange={handleChange} ref={fileInputRef} hidden />
+      <input accept="image/*" type="file" onChange={handleChange} ref={fileInputRef} hidden />
     </>
   )
 }

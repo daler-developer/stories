@@ -7,21 +7,52 @@
   background-color: white;
   border: 1px solid rgb(219, 219, 219);
   display: flex;
+  align-items: center;
   padding: 4px;
+  column-gap: 5px;
+  user-select: none;
 
-  &__left {
+  &__title {
+    padding-left: 5px;
     flex: 1 0 0;
+    font-size: 20px;
+    font-weight: 900;
   }
   &__avatar {
     height: 100%;
   }
-  &__actions {
-
+  &__body {
+    align-self: stretch;
+    display: flex;
+    column-gap: 4px;
   }
-  &__actions-btn {
+  &__menu-wrapper {
+    position: relative;
+  }
+  &__open-menu-btn {
     height: 100%;
     font-size: 22px;
   }
-  &__logout-btn {
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 3px;
+    background-color: white;
+  }
+  &__menu-btn {
+    width: 100%;
+    white-space: nowrap;
+    font-size: 15px;
+    height: 30px;
+    padding: 3px 5px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.041);
+    }
   }
 }

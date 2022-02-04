@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     main: path.join(__dirname, 'src', 'index.js'),
   },
@@ -24,6 +24,9 @@ module.exports = {
       path.resolve(__dirname, 'node_modules'),
     ],
   },
+  performance: {
+    hints: false
+  },
   devServer: {
     port: 3000,
     hot: true,
@@ -31,6 +34,12 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:4000',
     },
+    client: {
+      overlay: {
+        errors: true,
+        warnings: true
+      }
+    }
   },
   module: {
     rules: [

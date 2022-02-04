@@ -1,4 +1,4 @@
-const multer  = require('multer')
+const multer = require('multer')
 const path = require('path')
 
 const storiesStorage = multer.diskStorage({
@@ -6,9 +6,9 @@ const storiesStorage = multer.diskStorage({
     cb(null, path.join(__dirname, '../media/stories'))
   },
   filename: function (req, file, cb) {
-    const prefix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    const prefix = Date.now() + '-' + Math.round(Math.random() * 1e9)
     cb(null, `${prefix}_${file.originalname}`)
-  }
+  },
 })
 
 const avatarsStorage = multer.diskStorage({
@@ -16,9 +16,9 @@ const avatarsStorage = multer.diskStorage({
     cb(null, path.join(__dirname, '../media/avatars'))
   },
   filename: function (req, file, cb) {
-    const prefix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    const prefix = Date.now() + '-' + Math.round(Math.random() * 1e9)
     cb(null, `${prefix}_${file.originalname}`)
-  }
+  },
 })
 
 module.exports = { storiesStorage, avatarsStorage }

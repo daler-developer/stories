@@ -3,7 +3,7 @@ import AuthProtected from './AuthProtected'
 import Layout from './Layout'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
-import Profile from './pages/Profile'
+
 
 const AppRoutes = () => {
   return (
@@ -14,7 +14,6 @@ const AppRoutes = () => {
 
       <Route element={<AuthProtected children={<Layout />} />}>
         <Route path="home" element={<Home />} />
-        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
   )

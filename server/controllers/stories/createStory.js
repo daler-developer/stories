@@ -1,4 +1,4 @@
-const Story = require("../../models/story")
+const Story = require('../../models/story')
 
 const createStory = async (req, res) => {
   try {
@@ -9,7 +9,10 @@ const createStory = async (req, res) => {
       return res.status(400).json({ message: 'File is not given' })
     }
 
-    const story = new Story({ creatorId: currentUser._id, fileUrl: `/api/files/stories/${file.filename}` })
+    const story = new Story({
+      creatorId: currentUser._id,
+      fileUrl: `/api/files/stories/${file.filename}`,
+    })
 
     await story.save()
 

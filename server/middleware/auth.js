@@ -1,6 +1,5 @@
-const User = require("../models/user")
+const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-
 
 const authMiddleware = async (req, res, next) => {
   const token = req.get('auth-token')
@@ -10,12 +9,12 @@ const authMiddleware = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, 'jwt_secret') 
+    const decoded = jwt.verify(token, 'jwt_secret')
 
     let user
 
     try {
-      user = await User.findOne({ username: decoded.username })  
+      user = await User.findOne({ username: decoded.username })
     } catch (e) {
       return res.status(500).json({ message: 'Server error' })
     }

@@ -2,15 +2,17 @@ import classNames from 'classnames'
 import Button from 'components/Button'
 import { useFormik } from 'formik'
 import { useEffect, useMemo } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link, useSearchParams } from 'react-router-dom'
-import { authActions } from 'redux/reducers/authReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useSearchParams, Navigate } from 'react-router-dom'
+import { authActions, selectIsAuthenticated } from 'redux/reducers/authReducer'
 import * as Yup from 'yup'
 
 const Auth = () => {
   const [params, setParams] = useSearchParams()
 
   const dispatch = useDispatch()
+
+  const isAuthenticated = useSelector((state) => selectIsAuthenticated(state))
 
   const tab = useMemo(() => {
     return params.get('tab')
@@ -48,6 +50,10 @@ const Auth = () => {
       form.resetForm()
     },
   })
+
+  if (isAuthenticated) {
+    return <Navigate to="/home" />
+  }
 
   return (
     <div className="auth">

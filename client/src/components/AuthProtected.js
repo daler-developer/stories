@@ -14,11 +14,7 @@ const AuthProtected = ({ children }) => {
     selectIsLoggingInWithToken(state)
   )
 
-  if (!isAuthenticated && isLoggingInWithToken) {
-    return <FullScreenLoader />
-  }
-
-  if (!isAuthenticated && !isLoggingInWithToken) {
+  if (!isAuthenticated) {
     return <Navigate to="/auth?tab=login" state={{ from: location }} />
   }
 

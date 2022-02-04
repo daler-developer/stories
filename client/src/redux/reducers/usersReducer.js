@@ -4,10 +4,10 @@ import api from 'utils/api'
 
 const fetchUsers = createAsyncThunk(
   'users/fetchUsers',
-  async ({ excludeCurrent }, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const { data } = await api.get(
-        `/api/users${excludeCurrent ? `?excludeCurrent=yes` : ''}`
+        `/api/users`
       )
 
       return { data }
@@ -41,13 +41,17 @@ const initialState = {
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {},
+  reducers: {
+    setUsers(state, { payload }) {
+      state.list = payload
+    }
+  },
   extraReducers: {
     [fetchUsers.pending](state, { payload }) {
       state.isFetching = true
     },
     [fetchUsers.fulfilled](state, { payload }) {
-      state.list.push(...payload.data.users)
+      state.list = payload.data.users
       state.isFetching = false
     },
     [fetchUsers.rejected](state, { payload }) {

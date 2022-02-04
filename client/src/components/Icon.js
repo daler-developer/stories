@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import pt from 'prop-types'
 
 const Icon = ({ className, variant, children }) => {
+
   const getTypeClassName = (type) => {
     switch (type) {
       case 'outlined':

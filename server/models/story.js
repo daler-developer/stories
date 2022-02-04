@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose')
 
-
 const StorySchema = new Schema({
   fileUrl: {
     type: String,
@@ -9,15 +8,15 @@ const StorySchema = new Schema({
   creatorId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
   created: {
     type: Schema.Types.Date,
     required: true,
     default() {
       return new Date()
-    }
-  }
+    },
+  },
 })
 
 const Story = model('Story', StorySchema)

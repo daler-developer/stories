@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { selectAlert, uiActions } from 'redux/reducers/uiReducer'
@@ -18,6 +18,17 @@ const Alert = ({}) => {
     }
   }, [alert.isHidden])
 
+  const icon = useMemo(() => {
+    switch (alert.type) {
+      case 'success':
+        return 'check_circle'
+      case 'error':
+        return 'error_outline'
+      default:
+        return null
+    }
+  }, [alert.type])
+
   return !alert.isHidden ? (
     <div
       className={classNames(
@@ -26,12 +37,9 @@ const Alert = ({}) => {
         { 'alert--error': alert.type === 'error' }
       )}
     >
-      {/* {alert.type && ( */}
       <Icon className="alert__icon">
-        {alert.type === 'success' && 'check_circle'}
-        {alert.type === 'error' && 'error_outline'}
+        {icon}
       </Icon>
-      {/* // )} */}
       <span className="alert__text">{alert.text || 'Unknown error'}</span>
     </div>
   ) : null
