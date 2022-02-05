@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { selectCurrentUserId } from 'redux/reducers/authReducer'
+import { storiesActions } from 'redux/reducers/storiesReducer'
 import {
   selectIsUsersFetching,
   selectUserById,
@@ -19,14 +20,20 @@ const Home = () => {
 
   const dispatch = useDispatch()
 
-  const users = useSelector((state) =>
-    selectUsersByUsernameIncludes(state, searchInputValue)
-  )
+  const users = useSelector((state) => selectUsers(state))
   const currentUserId = useSelector((state) => selectCurrentUserId(state))
   const isFetching = useSelector((state) => selectIsUsersFetching(state))
+
+  const filteredUsers = useMemo(() => {
+    const filteredBySearchValue = users.filter((user) => user.username.includes(searchInputValue))
+    const filteredByCurrentExcluded = filteredBySearchValue.filter((user) => user._id !== currentUserId)
+
+    return filteredByCurrentExcluded
+  }, [users])
   
   const handleReloadBtnClick = () => {
     dispatch(usersActions.fetchUsers())
+    dispatch(storiesActions.fetchStories())
   }
 
   return (
@@ -50,7 +57,7 @@ const Home = () => {
         {/* Users */}
         {!isFetching && (
           <div className="home__users">
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <User data={user} key={user_id} key={user._id} className="home__user" />
             ))}
           </div>

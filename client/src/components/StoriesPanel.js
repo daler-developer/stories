@@ -1,6 +1,5 @@
 import classNames from 'classnames'
-import useOnClickOutside from 'hooks/useOnOutsideClick'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectStoriesByCreatorId,
@@ -20,6 +19,12 @@ const StoriesPanel = () => {
   const stories = useSelector((state) =>
     selectStoriesByCreatorId(state, selectedUser?._id)
   )
+
+  useEffect(() => {
+    if (panel.isHidden) {
+      setSelectedStoryIndex(0)
+    }
+  }, [panel.isHidden])
 
   const hasNext = useMemo(() => selectedStoryIndex + 1 !== stories.length, [selectedStoryIndex, stories])
   const hasPrevious = useMemo(() => selectedStoryIndex !== 0, [selectedStoryIndex, stories])

@@ -6,6 +6,7 @@ const path = require('path')
 const authRouter = require('./routers/auth')
 const usersRouter = require('./routers/users')
 const storiesRouter = require('./routers/stories')
+const config = require('./config.json')
 
 const app = express()
 
@@ -27,13 +28,14 @@ app.use('*', (req, res) => {
 const start = async () => {
   try {
     await mongoose.connect(
-      'mongodb+srv://dalersaidov:2000909k@cluster-for-learning.uecly.mongodb.net/stories-mern?retryWrites=true&w=majority'
+      config.mongodbURL
     )
 
-    app.listen(process.env.PORT || 4000)
-    console.log('listening')
+    app.listen(4000, () => {
+      console.log('listening on port 4000')
+    })
   } catch (e) {
-    console.log('db error', e)
+    console.log('Error with db')
   }
 }
 

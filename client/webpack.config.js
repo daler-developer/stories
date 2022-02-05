@@ -37,7 +37,7 @@ module.exports = {
     client: {
       overlay: {
         errors: true,
-        warnings: true
+        warnings: false
       }
     }
   },

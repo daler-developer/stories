@@ -14,3 +14,14 @@
     background-color: white;
   }
 }
+
+@include mq('phablet') {
+  .layout {
+    padding: 5px;
+
+    &__body {
+      max-width: none;
+      height: 100%;
+    }
+  }
+}

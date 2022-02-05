@@ -41,11 +41,11 @@ const Auth = () => {
         .min(3, 'Too short')
         .max(15, 'Too long'),
     }),
-    onSubmit({ username, password }) {
+    async onSubmit({ username, password }) {
       if (tab === 'register') {
-        dispatch(authActions.register({ username, password }))
+        await dispatch(authActions.register({ username, password })).unwrap()
       } else if (tab === 'login') {
-        dispatch(authActions.login({ username, password }))
+        await dispatch(authActions.login({ username, password })).unwrap()
       }
       form.resetForm()
     },
@@ -106,6 +106,7 @@ const Auth = () => {
 
         {/* Submit */}
         <Button
+          color="blue"
           isLoading={form.isSubmitting}
           className="auth__submit-btn"
           type="submit"

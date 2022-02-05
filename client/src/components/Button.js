@@ -1,22 +1,35 @@
 import classNames from 'classnames'
 import pt from 'prop-types'
+import { useMemo } from 'react'
+import Loader from './Loader'
 
 const Button = ({
   children,
   isLoading,
   className,
-  classes,
   color,
   ...rest
 }) => {
+
+  const loaderColor = useMemo(() => {
+    if (color === 'black') {
+      return 'white'
+    } else if (color === 'light') {
+      return 'black'
+    }
+  }, [color])
+
   return (
     <button
       type="submit"
-      className={classNames('button', `button--color--${color}`, className)}
+      className={classNames('button', color && `button--color--${color}`, className)}
       {...rest}
     >
       {isLoading ? (
-        <div className={classNames('button__loader', classes?.loader)} />
+        <Loader 
+          color={loaderColor}
+          className={classNames('button__loader')}
+        />
       ) : (
         children
       )}
@@ -24,18 +37,10 @@ const Button = ({
   )
 }
 
-Button.defaultProps = {
-  color: 'blue',
-}
-
 Button.propTypes = {
   children: pt.any.isRequired,
   isLoading: pt.bool,
   className: pt.string,
-  classes: pt.shape({
-    root: pt.string,
-    loader: pt.string,
-  }),
   color: pt.oneOf(['blue', 'light']),
 }
 

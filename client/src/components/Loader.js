@@ -4,6 +4,7 @@ import pt from 'prop-types'
 const Loader = ({ size, color, className }) => {
   return (
     <div
+      role="loader"
       className={classNames(
         'loader',
         size && `loader--size--${size}`,
