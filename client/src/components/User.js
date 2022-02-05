@@ -30,10 +30,7 @@ const User = ({ data, className }) => {
       )}
     >
       {/* Avatar */}
-      <Avatar
-        className="user__avatar"
-        user={data}
-      />
+      <Avatar className="user__avatar" user={data} />
       {/* Avatar */}
 
       {/* Username */}

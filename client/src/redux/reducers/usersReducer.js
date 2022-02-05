@@ -2,36 +2,34 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { authActions, selectCurrentUserId } from 'redux/reducers/authReducer'
 import api from 'utils/api'
 
-const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
-  async (_, thunkAPI) => {
+const fetchUsers = createAsyncThunk('users/fetchUsers', async (_, thunkAPI) => {
+  try {
+    const { data } = await api.get(`/api/users`)
+
+    return { data }
+  } catch (e) {
+    thunkAPI.dispatch(
+      uiActions.openAlert({ type: 'error', text: e.response.data.message })
+    )
+    return thunkAPI.rejectWithValue({ data: e.respones.data })
+  }
+})
+
+const changeAvatar = createAsyncThunk(
+  'users/changeAvatar',
+  async (form, thunkAPI) => {
     try {
-      const { data } = await api.get(
-        `/api/users`
-      )
+      const _id = selectCurrentUserId(thunkAPI.getState())
+
+      const { data } = await api.post(`/api/users/${_id}/change-avatar`, form)
 
       return { data }
     } catch (e) {
-      thunkAPI.dispatch(
-        uiActions.openAlert({ type: 'error', text: e.response.data.message })
-      )
+      console.log(e.response)
       return thunkAPI.rejectWithValue({ data: e.respones.data })
     }
   }
 )
-
-const changeAvatar = createAsyncThunk('users/changeAvatar', async (form, thunkAPI) => {
-  try {
-    const _id = selectCurrentUserId(thunkAPI.getState())
-
-    const { data } = await api.post(`/api/users/${_id}/change-avatar`, form)
-
-    return { data }
-  } catch (e) {
-    console.log(e.response)
-    return thunkAPI.rejectWithValue({ data: e.respones.data })
-  }
-})
 
 const initialState = {
   list: [],
@@ -44,7 +42,7 @@ const usersSlice = createSlice({
   reducers: {
     setUsers(state, { payload }) {
       state.list = payload
-    }
+    },
   },
   extraReducers: {
     [fetchUsers.pending](state, { payload }) {
@@ -67,10 +65,12 @@ const usersSlice = createSlice({
       state.list.push(payload.data.user)
     },
     [changeAvatar.fulfilled](state, { payload }) {
-      const index = state.list.findIndex((user) => user._id === payload.data.user._id)
+      const index = state.list.findIndex(
+        (user) => user._id === payload.data.user._id
+      )
 
       state.list[index] = payload.data.user
-    }
+    },
   },
 })
 
@@ -97,7 +97,7 @@ export const selectUsersByUsernameIncludes = (state, username) => {
 export const usersActions = {
   ...usersSlice.actions,
   fetchUsers,
-  changeAvatar
+  changeAvatar,
 }
 
 export default usersSlice.reducer

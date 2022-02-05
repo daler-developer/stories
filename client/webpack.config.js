@@ -25,7 +25,7 @@ module.exports = {
     ],
   },
   performance: {
-    hints: false
+    hints: false,
   },
   devServer: {
     port: 3000,
@@ -37,9 +37,9 @@ module.exports = {
     client: {
       overlay: {
         errors: true,
-        warnings: false
-      }
-    }
+        warnings: false,
+      },
+    },
   },
   module: {
     rules: [

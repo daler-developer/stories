@@ -4,7 +4,6 @@ import Layout from './Layout'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
 
-
 const AppRoutes = () => {
   return (
     <Routes>

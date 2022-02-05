@@ -26,8 +26,14 @@ const StoriesPanel = () => {
     }
   }, [panel.isHidden])
 
-  const hasNext = useMemo(() => selectedStoryIndex + 1 !== stories.length, [selectedStoryIndex, stories])
-  const hasPrevious = useMemo(() => selectedStoryIndex !== 0, [selectedStoryIndex, stories])
+  const hasNext = useMemo(
+    () => selectedStoryIndex + 1 !== stories.length,
+    [selectedStoryIndex, stories]
+  )
+  const hasPrevious = useMemo(
+    () => selectedStoryIndex !== 0,
+    [selectedStoryIndex, stories]
+  )
 
   const dispatch = useDispatch()
 
@@ -55,7 +61,9 @@ const StoriesPanel = () => {
     <div className="stories-panel">
       {/* Go previous */}
       <button
-        className={classNames('stories-panel__go-previous-btn', { 'stories-panel__go-previous-btn--mute': !hasPrevious })}
+        className={classNames('stories-panel__go-previous-btn', {
+          'stories-panel__go-previous-btn--mute': !hasPrevious,
+        })}
         onClick={handleGoPreviusBtnClick}
       >
         <Icon>chevron_left</Icon>
@@ -73,7 +81,9 @@ const StoriesPanel = () => {
 
       {/* Go next */}
       <button
-        className={classNames('stories-panel__go-next-btn', { 'stories-panel__go-next-btn--mute': !hasNext })}
+        className={classNames('stories-panel__go-next-btn', {
+          'stories-panel__go-next-btn--mute': !hasNext,
+        })}
         onClick={handleGoNextBtnClick}
       >
         <Icon>chevron_right</Icon>

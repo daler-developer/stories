@@ -2,7 +2,11 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { authActions, selectIsAuthenticated, selectIsLoggingInWithToken } from 'redux/reducers/authReducer'
+import {
+  authActions,
+  selectIsAuthenticated,
+  selectIsLoggingInWithToken,
+} from 'redux/reducers/authReducer'
 import { storiesActions } from 'redux/reducers/storiesReducer'
 import { usersActions } from 'redux/reducers/usersReducer'
 import Alert from './Alert'
@@ -25,7 +29,6 @@ const App = () => {
       dispatch(usersActions.fetchUsers())
       dispatch(storiesActions.fetchStories())
     } else {
-  
     }
   }, [isAuthenticated])
 

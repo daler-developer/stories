@@ -37,9 +37,7 @@ const Alert = ({}) => {
         { 'alert--error': alert.type === 'error' }
       )}
     >
-      <Icon className="alert__icon">
-        {icon}
-      </Icon>
+      <Icon className="alert__icon">{icon}</Icon>
       <span className="alert__text">{alert.text || 'Unknown error'}</span>
     </div>
   ) : null

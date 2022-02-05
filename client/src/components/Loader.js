@@ -15,7 +15,6 @@ const Loader = ({ size, color, className }) => {
   )
 }
 
-
 Loader.propTypes = {
   size: pt.oneOf(['sm', 'md', 'lg']),
   color: pt.oneOf(['black', 'white', 'grey']),

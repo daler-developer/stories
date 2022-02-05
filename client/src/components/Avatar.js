@@ -21,7 +21,16 @@ const Avatar = ({ user, size, className, ...rest }) => {
   }
 
   return (
-    <div onClick={handleAvatarClick} className={classNames('avatar', size && `avatar--size--${size}`, { 'avatar--with-stories': hasStories }, className)}>
+    <div
+      role="avatar"
+      onClick={handleAvatarClick}
+      className={classNames(
+        'avatar',
+        size && `avatar--size--${size}`,
+        { 'avatar--with-stories': hasStories },
+        className
+      )}
+    >
       {/* Img */}
       <img
         {...rest}
@@ -32,7 +41,6 @@ const Avatar = ({ user, size, className, ...rest }) => {
     </div>
   )
 }
-
 
 Avatar.propTypes = {
   user: pt.object.isRequired,

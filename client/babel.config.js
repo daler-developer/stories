@@ -1,5 +1,3 @@
-
-
 module.exports = (api) => {
   const isTest = api.env('test')
 
@@ -9,8 +7,8 @@ module.exports = (api) => {
         [
           '@babel/preset-env',
           {
-            targets: {node: 'current'}
-          }
+            targets: { node: 'current' },
+          },
         ],
         [
           '@babel/preset-react',
@@ -19,7 +17,6 @@ module.exports = (api) => {
           },
         ],
       ],
-
     }
   }
 

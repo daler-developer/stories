@@ -6,5 +6,5 @@ module.exports = {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
   },
   setupFilesAfterEnv: ['<rootDir>/src/tests/setup.js'],
-  moduleDirectories: ['src', 'node_modules']
+  moduleDirectories: ['src', 'node_modules'],
 }
