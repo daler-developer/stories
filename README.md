@@ -22,7 +22,7 @@ Please install the following software before starting development:
 ### Steps
   - Clone [repository](https://github.com/daler-developer/stories-mern)
   - Run `npm install` in 'client' and 'server' folders
-  - Set MongoDB database URL in 'server/config.json' file 
+  - Set MongoDB database URL in 'mongodbURL' field in 'server/config.json' file 
   - Run `npm run dev` in 'client' and 'server' folders
   - Open browser on http://localhost:3000
   
